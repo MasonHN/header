@@ -1,36 +1,35 @@
-
 /* Info Bar */
 .logo {
-  height : 50px; 
-  width : 250px; 
-  margin-left: 50px; 
+  height: 50px;
+  width: 250px;
+  margin-left: 50px;
   cursor: pointer;
 }
 
 #womensTab {
-  width : 70px; 
-  height: 60px; 
-  margin-left : 15px; 
-  background-color: #000; 
+  width: 70px;
+  height: 60px;
+  margin-left: 15px;
+  background-color: #000;
   color: white;
-  border-bottom : 5px solid black;
+  border-bottom: 5px solid black;
 }
 
 .othersTab {
-  width : 70px; 
-  background-color: white; 
-  color: #000; 
+  width: 70px;
+  background-color: white;
+  color: #000;
   border: 1px solid grey;
 }
 
 #searchDiv {
-  margin-left : 20px;
+  margin-left: 20px;
 }
 
 #searchIconDiv {
-  width: 100px; 
-  background-color: black; 
-  margin-right: 20px; 
+  width: 100px;
+  background-color: black;
+  margin-right: 20px;
   cursor: pointer;
 }
 
@@ -54,7 +53,8 @@
 }
 
 @media screen and (max-width: 1000px) {
-  #womensTab, .othersTab {
+  #womensTab,
+  .othersTab {
     display: none;
     width: 250px;
   }
@@ -67,7 +67,9 @@
 }
 
 @media screen and (max-width: 700px) {
-  #favoriteIconDiv, #cardTravelIconDiv, #personIconDiv {
+  #favoriteIconDiv,
+  #cardTravelIconDiv,
+  #personIconDiv {
     display: none;
   }
 }

@@ -1,38 +1,38 @@
-import Autosuggest from 'react-autosuggest';
+import Autosuggest from "react-autosuggest";
 import React from "react";
 import Suggestion from "./suggestion";
 
 const theme = {
   container: {
-    position: 'relative'
+    position: "relative"
   },
   input: {
     width: 300,
     height: 10,
-    padding: '10px 20px',
-    fontFamily: 'Helvetica, sans-serif',
+    padding: "10px 20px",
+    fontFamily: "Helvetica, sans-serif",
     fontWeight: 300,
     fontSize: 16,
-    border: '1px solid #aaa',
+    border: "1px solid #aaa"
   },
   inputFocused: {
-    outline: 'none'
+    outline: "none"
   },
   inputOpen: {
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0
   },
   suggestionsContainer: {
-    display: 'none'
+    display: "none"
   },
   suggestionsContainerOpen: {
-    display: 'block',
-    position: 'absolute',
+    display: "block",
+    position: "absolute",
     top: 51,
     width: 280,
-    border: '1px solid #aaa',
-    backgroundColor: '#fff',
-    fontFamily: 'Helvetica, sans-serif',
+    border: "1px solid #aaa",
+    backgroundColor: "#fff",
+    fontFamily: "Helvetica, sans-serif",
     fontWeight: 300,
     fontSize: 16,
     borderBottomLeftRadius: 4,
@@ -42,83 +42,91 @@ const theme = {
   suggestionsList: {
     margin: 0,
     padding: 0,
-    listStyleType: 'none',
+    listStyleType: "none"
   },
   suggestion: {
-    cursor: 'pointer',
-    padding: '10px 20px'
+    cursor: "pointer",
+    padding: "10px 20px"
   },
   suggestionHighlighted: {
-    backgroundColor: '#ddd'
+    backgroundColor: "#ddd"
   }
 };
 
 function escapeRegexCharacters(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function getSuggestionValue(suggestion) {
   return suggestion.name;
 }
 
-
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: '',
+      value: "",
       suggestions: [],
-      uuid: '',
+      uuid: ""
     };
     this.onChange = this.onChange.bind(this);
-    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
-    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(
+      this
+    );
+    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(
+      this
+    );
     this.getSuggestions = this.getSuggestions.bind(this);
-    this.renderSuggestion = this.renderSuggestion.bind(this);    
+    this.renderSuggestion = this.renderSuggestion.bind(this);
   }
 
   renderSuggestion(suggestion) {
     return (
-      <Suggestion name={suggestion.name} uuid={suggestion.uuid} price={suggestion.price} updateUuid = {this.props.updateUuid}/>
+      <Suggestion
+        name={suggestion.name}
+        uuid={suggestion.uuid}
+        price={suggestion.price}
+        updateUuid={this.props.updateUuid}
+      />
     );
   }
-  
+
   getSuggestions(value) {
     const escapedValue = escapeRegexCharacters(value.trim());
-  
-    if (escapedValue === '') {
+
+    if (escapedValue === "") {
       return [];
     }
-  
-    const regex = new RegExp('^' + escapedValue, 'i');
-  
+
+    const regex = new RegExp("^" + escapedValue, "i");
+
     return this.props.productInfo.filter(product => regex.test(product.name));
   }
 
   componentDidMount() {
     this.setState({
-      products : this.props.productInfo,
-    })
+      products: this.props.productInfo
+    });
   }
 
-  onChange(event, { newValue, method }){
+  onChange(event, { newValue, method }) {
     this.setState({
       value: newValue
     });
-  };
-  
-  onSuggestionsFetchRequested({ value }){
+  }
+
+  onSuggestionsFetchRequested({ value }) {
     this.setState({
       suggestions: this.getSuggestions(value)
     });
-  };
+  }
 
-  onSuggestionsClearRequested(){
+  onSuggestionsClearRequested() {
     this.setState({
       suggestions: []
     });
-  };
+  }
 
   render() {
     const { value, suggestions } = this.state;
@@ -129,7 +137,7 @@ class Search extends React.Component {
     };
 
     return (
-      <Autosuggest 
+      <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
